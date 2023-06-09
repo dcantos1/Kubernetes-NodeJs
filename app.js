@@ -18,6 +18,14 @@ app.use(cors(corsOptions))
 
 app.use(router)
 
+app.get('/healthcheck',(req,res) => {
+    res.send({status: 'Trabajando ando'})
+})
+
+app.get('/authors',(req,res) => {
+    res.send({authors: 'David Cantos'})
+})
+
 app.use('/home',(req,res) => { res.sendFile(path.join(__dirname+'/src/html/index.html')); })
 app.use('/', (req, res) => { res.send(`I Love Docker & Kubernetes & NodeJs`);})
 

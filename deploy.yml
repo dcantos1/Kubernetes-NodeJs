@@ -6,7 +6,7 @@ metadata:
     name: testing-kube-deploy
     app: testing-kube-app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       name: testing-kube-pod
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: testing-kube-container
-          image: "<add-your-repo-uri>"
+          image: "257654204247.dkr.ecr.us-east-1.amazonaws.com/01-k8s-aws:latest"
           imagePullPolicy: Always
           resources:
             limits:
