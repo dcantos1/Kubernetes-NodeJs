@@ -26,6 +26,10 @@ kubectl scale --replicas=1 -f deploy.yml
 Modificar
 kubectl apply -f deploy.yml
 
+borrar deploy o servicio
+kubectl delete -f deploy.yml
+kubectl delete -f serviceNodePort.yml
+
 revisar el despliegue:
 kubectl get pods
 kubectl get pods --watch
@@ -39,6 +43,13 @@ kubectl get service
 
 Obtener el deploy
 kubectl get deployments
+
+
+Instalar ingress
+kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
+No olvidar lo permisos necesarios
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.8/docs/examples/alb-ingress-controller.yaml
+
 
 Servicio Nodeport para exponer un puerto en especifico al publico.
 El servicio mas usado es el de loadbalance, tambien esta el de clusterIP es para  exponer la IP del cluster para tener un control hacia los contenedores
