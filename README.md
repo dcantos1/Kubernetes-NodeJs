@@ -44,6 +44,9 @@ kubectl get service
 Obtener el deploy
 kubectl get deployments
 
+eliminar ingress
+kubectl delete ingress testing-kube-ingress
+
 
 Instalar ingress
 kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
@@ -59,3 +62,29 @@ problemas doc
 https://repost.aws/knowledge-center/eks-api-server-unauthorized-error
 
 Programa Lens control de kubernetes desktop
+
+terraform.exe plan -var-file terraform.tfvars (Para correr sobre un archivo de variables parametrizado)
+terraform plan -var-file="terraform.tfvars"
+terraform apply -var-file="terraform.tfvars" -auto-approve
+
+https://kubernetes.github.io/ingress-nginx/deploy/
+https://learnk8s.io/terraform-eks
+
+editar finalizers en ingress y elimarlo.
+kubectl patch ingress testing-kube-ingress -p '{"metadata":{"finalizers":[]}}' --type=merge 
+editar finalizer en el service
+kubectl patch service testing-kube-service -p '{"metadata":{"finalizers":[]}}' --type=merge
+
+Otra soluciones
+kubectl delete ValidatingWebhookConfiguration aws-load-balancer-webhook
+
+Tag en VPC para ALB.
+subnet Private
+key                                 | value
+kubernetes.io/role/internal-elb     | 1
+kubernetes.io/cluster/nombreCluster | shared
+
+subnet Public
+key                                 | value
+kubernetes.io/role/elb              | 1
+kubernetes.io/cluster/nombreCluster | shared
